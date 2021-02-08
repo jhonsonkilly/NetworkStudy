@@ -1,6 +1,8 @@
 package com.xhb.component.volleyplus;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -38,7 +40,7 @@ public class PlusQueue {
         this(
                 cache,
                 network,
-                new PlusDelivery());
+                new PlusDelivery(new Handler(Looper.getMainLooper())));
     }
 
     private void stop() {
