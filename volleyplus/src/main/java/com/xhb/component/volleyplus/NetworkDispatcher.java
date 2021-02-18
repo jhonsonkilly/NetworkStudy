@@ -18,13 +18,12 @@ public class NetworkDispatcher extends Thread {
 
     private boolean mQuit;
 
-    private PriorityBlockingQueue<PlusRequest> mPriorityQueue;
-    private Response response;
+    private PriorityBlockingQueue<PlusRequest<?>> mPriorityQueue;
 
 
     public NetworkDispatcher(Network network,
                              Delivery delivery,
-                             PriorityBlockingQueue<PlusRequest> priorityQueue) {
+                             PriorityBlockingQueue<PlusRequest<?>> priorityQueue) {
         this.mNetwork = network;
         this.mDelivery = delivery;
         this.mPriorityQueue = priorityQueue;
@@ -36,8 +35,7 @@ public class NetworkDispatcher extends Thread {
         Process.setThreadPriority(THREAD_PRIORITY_BACKGROUND);
         while (true) {
             try {
-
-                PlusRequest request = mPriorityQueue.take();
+                PlusRequest<?> request = mPriorityQueue.take();
                 processRequest(request);
             } catch (InterruptedException e) {
                 if (mQuit) {
@@ -49,9 +47,10 @@ public class NetworkDispatcher extends Thread {
     }
 
 
-    private void processRequest(PlusRequest request) {
+    private void processRequest(PlusRequest<?> request) {
         long startTime = SystemClock.elapsedRealtime();
-        Response response = mNetwork.parseNetworkResponse(request);
+        NetworkResponse networkResponse = mNetwork.parseNetworkResponse(request);
+        Response<?> response = request.parseResponse(networkResponse);
         mDelivery.postDelivery(request, response);
     }
 

@@ -5,5 +5,5 @@ package com.xhb.component.volleyplus;
  */
 public interface Delivery {
 
-    void postDelivery(PlusRequest plusRequest, Response response);
+    void postDelivery(PlusRequest<?> plusRequest, Response<?> response);
 }

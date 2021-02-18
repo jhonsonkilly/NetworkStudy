@@ -7,7 +7,7 @@ public class NetworkImpl implements Network {
 
 
     @Override
-    public Response parseNetworkResponse(PlusRequest plusRequest) {
-        return new Response();
+    public NetworkResponse parseNetworkResponse(PlusRequest<?> plusRequest) {
+        return new NetworkResponse();
     }
 }

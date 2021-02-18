@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
                 { listener -> textView.text = listener.networkResponse.toString() })
 
             // Add the request to the RequestQueue.
+
             Singleton.getInstance(this).addRequest(stringRequest)
+
         }
     }
 

@@ -38,9 +38,15 @@ public class Singleton {
     }
 
     public <T> void addRequest(Request<T> request) {
-        getQueue().add(request);
-    }
 
+        getQueue().add(request);
+        getQueue().addRequestEventListener(new RequestQueue.RequestEventListener() {
+            @Override
+            public void onRequestEvent(Request<?> request, @RequestQueue.RequestEvent int event) {
+
+            }
+        });
+    }
 
 
 }

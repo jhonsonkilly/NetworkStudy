@@ -96,7 +96,7 @@ public class BasicNetwork implements Network {
         while (true) {
             HttpResponse httpResponse = null;
             byte[] responseContents = null;
-            List<Header> responseHeaders = Collections.emptyList();
+            List<Header> responseHeaders;
             try {
                 // Gather headers.
                 Map<String, String> additionalRequestHeaders =

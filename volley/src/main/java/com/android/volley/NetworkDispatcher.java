@@ -115,6 +115,7 @@ public class NetworkDispatcher extends Thread {
         request.sendEvent(RequestQueue.RequestEvent.REQUEST_NETWORK_DISPATCH_STARTED);
         try {
             request.addMarker("network-queue-take");
+            VolleyLog.d( "Unhandled exception %s", "3");
 
             // If the request was cancelled already, do not perform the
             // network request.
